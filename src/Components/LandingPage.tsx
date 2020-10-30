@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core';
 import MaterialTable from 'material-table'
+import Register from './PopOutBox'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,7 +32,7 @@ function LandingPage() {
                 <Toolbar>
                     <Button color="inherit" >Login</Button>
                     <Typography>/</Typography>
-                    <Button color="inherit" >Register</Button>
+                    <Button color="inherit" ><Register/></Button>
                 </Toolbar>
             </AppBar>
             <TextField label="Countdown Timer" variant="outlined" style={{ margin: 20 }} />

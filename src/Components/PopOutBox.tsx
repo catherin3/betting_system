@@ -23,8 +23,8 @@ export default function Register() {
     
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Login
+      <Button  style={{color:'white'}} onClick={handleClickOpen}>
+        Register
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Login/Register</DialogTitle>
