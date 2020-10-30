@@ -1,4 +1,5 @@
 import React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,43 +7,55 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import RegisterForm from './RegisterForm'
-
+import FormControl from '@material-ui/core/FormControl';
 
 export default function Register() {
-  const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
+    const useStyles = makeStyles(() =>
+        createStyles({
 
-    
-  return (
-    <div>
-      <Button  style={{color:'white'}} onClick={handleClickOpen}>
-        Register
+            formControl: {
+                minWidth: 400,
+                minHeight: 400
+            },
+
+        }),
+    );
+    const classes = useStyles();
+
+    return (
+        <div>
+            <Button style={{ color: 'white' }} onClick={handleClickOpen}>
+                Register
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Login/Register</DialogTitle>
-        <DialogContent>
-          <DialogContentText style={{color:'black'}}>
-            Welcome to new Betting Place
+            <Dialog maxWidth='lg' open={open} onClose={handleClose} aria-labelledby="max-width-dialog-title">
+                <DialogTitle id="max-width-dialog-title">Register</DialogTitle>
+                <DialogContent>
+                    <DialogContentText style={{ color: 'black' }}>
+                        Welcome to new Betting Place
           </DialogContentText>
-          <RegisterForm/>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+                    <FormControl className={classes.formControl}>
+                        <RegisterForm />
+                    </FormControl>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Login
+                    <Button onClick={handleClose} color="primary">
+                        Login
           </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }

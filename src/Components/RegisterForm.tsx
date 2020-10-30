@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { Formik, Form} from "formik";
+import { Formik, Form, Field} from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { useState } from 'react'
@@ -61,6 +61,7 @@ const RegisterForm: React.FC = () => {
                             <FormikField name="userName" label="Username" required />
                             <ShowPassword name="password" label="Password" type={showPassword ? 'text' : 'password'} showPassword={showPassword} setShowPassword={setShowPassword} required />
                             <ShowsPassword name="cfmPassword" label="Confirm Password" type={showsPassword ? 'text' : 'password'} showsPassword={showsPassword} setShowsPassword={setShowsPassword} required />
+                            <label><Field name='acceptedTerms' type='checkbox' required />I agree to the Terms of Service and Privacy Policy</label>
                             <Button
                                 variant="contained"
                                 color="primary" 
