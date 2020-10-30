@@ -42,7 +42,7 @@ const SignupSchema = Yup.object().shape({
 
 const RegisterForm: React.FC = () => {
     const handleSubmit = (values: FormValues): void => {
-        window.location.href='/mainpage';
+        window.location.href='/';
         alert(JSON.stringify(values, null, 2));
     }
 
