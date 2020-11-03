@@ -80,7 +80,7 @@ export default function BettingPage() {
                         }
                     }
                     }><AddIcon /></IconButton>
-                    <Typography>Numbers chosen: {numberArray} </Typography>
+                    <Typography> Numbers chosen: {[numberArray]+''} </Typography>
                     <Button onClick={() => {
                         if (success === true) {
                             setText('Successfully Placed your bets')
