@@ -45,15 +45,12 @@ export default function Register() {
           </DialogContentText>
                     <FormControl className={classes.formControl}>
                         <LoginPage />
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+          </Button>
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-          </Button>
-                    <Button onClick={handleClose} color="primary">
-                        Login
-          </Button>
                 </DialogActions>
             </Dialog>
         </div>
