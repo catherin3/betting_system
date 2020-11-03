@@ -14,7 +14,7 @@ const useStyles = makeStyles(() =>
 
 export default function BettingPage() {
     const classes = useStyles();
-    const [type, setType] = useState<number>(0)
+    const [type, setType] = useState<number>(7)
     const [chosenNumber, setChosenNumber] = useState<number>(0)
     const [success, setSuccess] = useState<boolean>(false)
     const [numberArray, setNumberArray] = useState<Array<Number>>([])
@@ -27,8 +27,9 @@ export default function BettingPage() {
     return (
         <div>
             <NavBar />
-            <Grid container style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Grid container style={{ justifyContent: 'center', alignItems: 'center',marginTop:20 }}>
                 <Grid item style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Typography>Minimum type would be defaulted as 7 and maximum as 15</Typography>
                     <FormControl className={classes.formControl}>
                         <InputLabel>Type</InputLabel>
                         <Select onChange={handleChange} value={type}>
@@ -73,14 +74,14 @@ export default function BettingPage() {
                                     console.log('Error')
                                 }
                             }
-                            else {
+                            if (numberArray.length === type){
                                 setSuccess(true)
                                 disabled = true
                             }
                         }
                     }
                     }><AddIcon /></IconButton>
-                    <Typography> Numbers chosen: {[numberArray]+''} </Typography>
+                    <Typography>Numbers chosen: {[numberArray]+''} </Typography>    
                     <Button onClick={() => {
                         if (success === true) {
                             setText('Successfully Placed your bets')
@@ -102,7 +103,6 @@ export default function BettingPage() {
 
 
 /*
-
 while(numberArray.length<type){
     if numberArray
     numberArray.push(chosenNumber)
