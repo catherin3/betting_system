@@ -61,12 +61,11 @@ const RegisterForm: React.FC = () => {
                             <FormikField name="userName" label="Username" required />
                             <ShowPassword name="password" label="Password" type={showPassword ? 'text' : 'password'} showPassword={showPassword} setShowPassword={setShowPassword} required />
                             <ShowsPassword name="cfmPassword" label="Confirm Password" type={showsPassword ? 'text' : 'password'} showsPassword={showsPassword} setShowsPassword={setShowsPassword} required />
-<<<<<<< HEAD
+
                             <label><Field name='acceptedTerms' type='checkbox' required />I agree to the Terms of Service and Privacy Policy</label>
                             <br/><br/> 
-=======
                             <label><Field name='acceptedTerms' type='checkbox' required />I agree to the Terms of Service and Privacy Policy</label> <br/><br/> 
->>>>>>> d06673492c0772dbaaee1643735dbab855f1d14f
+
                             <Button
                                 variant="contained"
                                 color="primary" 
