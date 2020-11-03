@@ -6,7 +6,7 @@ import BettingPage from './Components/Betting/BettingPage'
 function App() {
   return (
     <div className="App">
-      <BettingPage />
+      <LandingPage/>
     </div>
   );
 }

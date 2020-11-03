@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import MaterialTable from 'material-table'
 import Register from './PopOutBox'
@@ -34,12 +34,12 @@ function LandingPage() {
     const [timerMinutes, setTimerMinutes] = useState(0);
     const [timerSeconds, setTimerSeconds] = useState(0);
 
-    let interval = useRef();
+
 
     const startTimer = () => {
         const countdowndate = new Date('November 3 2020 18:00:00').getTime();
 
-            const interval = setInterval(() => {
+            setInterval(() => {
             const now = new Date().getTime();
             const distance = countdowndate - now;
 
@@ -62,12 +62,8 @@ function LandingPage() {
         }, 1000);
     };
 
-    useEffect(() => {
-        startTimer();
-        return () => {
-            clearInterval(interval.current)
-        }
-    },);
+    startTimer();
+
 
     return (
         <div className={classes.root}>
