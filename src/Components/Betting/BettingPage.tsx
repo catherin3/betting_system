@@ -21,7 +21,7 @@ export default function BettingPage() {
     //const numberArray:Number[] =[]
     const handleChange = (e: any) => setType(e.target.value)
     const handleNumber = (e: any) => setChosenNumber(e.target.value)
-    let disabled=false
+    let disabled = false
     const [text, setText] = useState<String>('')
     //setNumberArray([])
     return (
@@ -54,45 +54,45 @@ export default function BettingPage() {
                         onChange={handleNumber}
                         error={chosenNumber > 54 && chosenNumber < 0}
                         helperText={type === 0 ? 'Empty field!' : chosenNumber}
-                      //  disabled={ numberArray.length === type ? false:true}
+                    //  disabled={ numberArray.length === type ? false:true}
                     >
                     </TextField>
                     <IconButton disabled={disabled} onClick={() => {
-                        if(numberArray) {
+                        if (numberArray) {
                             if (numberArray.length < type) {
-                                if (numberArray && chosenNumber < 54 && chosenNumber > 0) {
-                                    setNumberArray([chosenNumber])
-                                    numberArray.push(chosenNumber)
-                                    console.log(numberArray)
-                                    if (numberArray.length === type) {
-                                        setSuccess(true)
-                                        disabled=true
-                                    } 
+                                if (chosenNumber < 52 && chosenNumber > 0) {
+                                    if (numberArray.length >= 1) {
+                                        numberArray.push(chosenNumber)
+                                        console.log(numberArray)
+                                    }
+                                    else {
+                                        setNumberArray([chosenNumber])
+                                    }
                                 }
-                                else {  
+                                else {
                                     console.log('Error')
                                 }
                             }
-                            else{
+                            else {
                                 setSuccess(true)
-                                disabled=true
+                                disabled = true
                             }
                         }
                     }
                     }><AddIcon /></IconButton>
                     <Typography>Numbers chosen: {numberArray} </Typography>
-                    <Button onClick={() =>{
-                        if (success === true){
+                    <Button onClick={() => {
+                        if (success === true) {
                             setText('Successfully Placed your bets')
                         }
-                        else{
+                        else {
                             setText('Not Successful')
                         }
                         console.log(success)
                         console.log(text)
                     }}>Submit</Button>
                     <Paper>
-                    <Typography>{text}</Typography>
+                        <Typography>{text}</Typography>
                     </Paper>
                 </Grid>
             </Grid>
