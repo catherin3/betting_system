@@ -10,52 +10,52 @@ import RegisterForm from './RegisterForm'
 import FormControl from '@material-ui/core/FormControl';
 
 export default function Register() {
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const useStyles = makeStyles(() =>
-        createStyles({
+  const useStyles = makeStyles(() =>
+    createStyles({
 
-            formControl: {
-                minWidth: 400,
-                minHeight: 400
-            },
+      formControl: {
+        minWidth: 400,
+        minHeight: 400
+      },
 
-        }),
-    );
-    const classes = useStyles();
+    }),
+  );
+  const classes = useStyles();
 
-    return (
-        <div>
-            <Button style={{ color: 'white' }} onClick={handleClickOpen}>
-                Register
+  return (
+    <div>
+      <Button style={{ color: 'white' }} onClick={handleClickOpen}>
+        Register
       </Button>
-            <Dialog maxWidth='lg' open={open} onClose={handleClose} aria-labelledby="max-width-dialog-title">
-                <DialogTitle id="max-width-dialog-title">Register</DialogTitle>
-                <DialogContent>
-                    <DialogContentText style={{ color: 'black' }}>
-                        Welcome to new Betting Place
+      <Dialog maxWidth='lg' open={open} onClose={handleClose} aria-labelledby="max-width-dialog-title">
+        <DialogTitle id="max-width-dialog-title">Register</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ color: 'black' }}>
+            Welcome to new Betting Place
           </DialogContentText>
-                    <FormControl className={classes.formControl}>
-                        <RegisterForm />
-                    </FormControl>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
+          <FormControl className={classes.formControl}>
+            <RegisterForm />
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
           </Button>
-                    <Button onClick={handleClose} color="primary">
-                        Login
+          <Button onClick={handleClose} color="primary">
+            Login
           </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
