@@ -6,9 +6,10 @@ import BettingPage from './Components/Betting/BettingPage'
 function App() {
   return (
     <div className="App">
-      <LandingPage/>
+      <BettingPage/>
     </div>
   );
 }
 
 export default App;
+  
