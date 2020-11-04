@@ -3,6 +3,7 @@ import { Typography, Grid, Select, MenuItem, FormControl, InputLabel, TextField,
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar'
 import AddIcon from '@material-ui/icons/Add';
+import MaterialTable from "material-table";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -18,12 +19,13 @@ export default function BettingPage() {
     const [chosenNumber, setChosenNumber] = useState<number>(0)
     const [success, setSuccess] = useState<boolean>(false)
     const [numberArray, setNumberArray] = useState<Array<Number>>([])
+    //const inputRef = useRef(null);
     //const numberArray:Number[] =[]
     const handleChange = (e: any) => setType(e.target.value)
     const handleNumber = (e: any) => setChosenNumber(e.target.value)
-    let disabled = false
+    const [disabled, setDisabled] = useState<boolean>(false)
     const [text, setText] = useState<String>('')
-    //setNumberArray([])
+    const [numberObject, setNumberObject] = useState({})
     return (
         <div>
             <NavBar />
@@ -52,9 +54,11 @@ export default function BettingPage() {
                         type='number'
                         InputProps={{ inputProps: { min: 1, max: 52 } }}
                         style={{ minWidth: 120 }}
+                        //inputRef={inputRef.current}
                         onChange={handleNumber}
                         error={chosenNumber > 54 || chosenNumber < 0}
                         helperText={chosenNumber > 54 || chosenNumber < 0 ? 'Error Value' : chosenNumber}
+                        required
                     //  disabled={ numberArray.length === type ? false:true}
                     >
                     </TextField>
@@ -69,6 +73,9 @@ export default function BettingPage() {
                                         else {
                                             numberArray.push(chosenNumber)
                                             console.log(numberArray)
+                                            //inputRef.current = null
+                                            setNumberObject({id: numberArray })
+                                            console.log(numberObject)
                                         }
                                     }
                                     else {
@@ -81,13 +88,15 @@ export default function BettingPage() {
                             }
                             if (numberArray.length === type) {
                                 setSuccess(true)
-                                disabled = true
+                                //setDisabled (true)
+                                console.log(disabled)
                             }
                         }
                     }
+
                     }><AddIcon /></IconButton>
                     <Typography>Numbers chosen: {[numberArray] + ''} </Typography>
-                    <Button onClick={() => {
+                    <Button disabled={disabled} onClick={() => {
                         if (success === true) {
                             setText('Successfully Placed your bets')
                         }
@@ -102,6 +111,13 @@ export default function BettingPage() {
                     </Paper>
                 </Grid>
             </Grid>
+            <MaterialTable
+                title="Betting Numbers"
+                columns={[
+                    { title: 'Numbers', field: 'id' },
+                ]}
+                data= {[numberObject]}
+            />
         </div>
     )
 }
