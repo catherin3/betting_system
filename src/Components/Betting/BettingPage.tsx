@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Grid, Select, MenuItem, FormControl, InputLabel, TextField, IconButton, Button, Paper } from '@material-ui/core'
+import { Typography, Grid, Select, MenuItem, FormControl, InputLabel, TextField, IconButton, Button, Paper, Menu, Fade } from '@material-ui/core'
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar'
 import AddIcon from '@material-ui/icons/Add';
@@ -14,6 +14,16 @@ const useStyles = makeStyles(() =>
 );
 
 export default function BettingPage() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     const classes = useStyles();
     const [type, setType] = useState<number>(7)
     const [chosenNumber, setChosenNumber] = useState<number>(0)
@@ -74,14 +84,14 @@ export default function BettingPage() {
                                         else {
                                             numberArray.push(chosenNumber)
                                             //inputRef.current = null
-                                            setNumberObject({id:chosenNumber})
+                                            setNumberObject({ id: chosenNumber })
                                             array.push(numberObject)
                                             console.log(array)
                                         }
                                     }
                                     else {
                                         setNumberArray([chosenNumber])
-                                        setNumberObject({id:chosenNumber})
+                                        setNumberObject({ id: chosenNumber })
                                     }
                                 }
                                 else {
@@ -111,24 +121,32 @@ export default function BettingPage() {
                     </Paper>
                 </Grid>
             </Grid>
-                <Grid>
-                    {
-                        numberArray.map((i, key) => {
-                            return <Button key={key} onClick={(e)=>{
-                                numberArray.pop()
-                            }}>{i}</Button>
-                        })
+            <Grid>
+                {
+                    numberArray.map((i, key) => {
+                        return <Button key={key} onClick={
+                            handleClick}>{i}</Button>
+                    })
+
+
+                }
+
+                <Menu
+                    id="fade-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    TransitionComponent={Fade}
+                >
+                    <MenuItem onClick={handleClose}>Edit</MenuItem>
+                    <MenuItem onClick={() => {
+                        numberArray.pop()
+                        setDisabled(false);
                     }
-                    
-                </Grid>
+                    }>Delete</MenuItem>
+                </Menu>
+            </Grid>
         </div>
     )
 }
-
-
-/*
-while(numberArray.length<type){
-    if numberArray
-    numberArray.push(chosenNumber)
-}
-*/
