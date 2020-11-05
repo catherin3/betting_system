@@ -145,7 +145,6 @@ export default function BettingPage() {
                     onClose={handleClose}
                     TransitionComponent={Fade}
                 >
-                    <MenuItem onClick={handleClose}>Edit</MenuItem>
                     <MenuItem onClick={(e:any) => {
                         console.log(index)
                         const ind = NumberArray.indexOf(index);
