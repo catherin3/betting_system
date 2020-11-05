@@ -17,8 +17,10 @@ export default function BettingPage() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleClick = (event: any) => {
+    const handleClick = (event: any, i: number) => {
         setAnchorEl(event.currentTarget);
+        console.log(i)
+        
     };
 
     const handleClose = () => {
@@ -28,15 +30,16 @@ export default function BettingPage() {
     const [type, setType] = useState<number>(7)
     const [chosenNumber, setChosenNumber] = useState<number>(0)
     const [success, setSuccess] = useState<boolean>(false)
-    const [numberArray, setNumberArray] = useState<Array<Number>>([])
+    const [NumberArray, setNumberArray] = useState<Array<number>>([])
     //const inputRef = useRef(null);
-    //const numberArray:Number[] =[]
+    //const NumberArray:Number[] =[]
     const handleChange = (e: any) => setType(e.target.value)
     const handleNumber = (e: any) => setChosenNumber(e.target.value)
     const [disabled, setDisabled] = useState<boolean>(false)
     const [text, setText] = useState<String>('')
-    const [numberObject, setNumberObject] = useState<Object>({})
+    const [NumberObject, setNumberObject] = useState<Object>({})
     const array: Object[] = []
+    const [index, setIndex]=useState<number>(-1)
     return (
         <div>
             <NavBar />
@@ -60,7 +63,7 @@ export default function BettingPage() {
                     <p />
                     <Typography>You Selected:{type}</Typography>
                     <p />
-                    <Typography>Pick {type} numbers from 1 to 52</Typography>
+                    <Typography>Pick {type} Numbers from 1 to 52</Typography>
                     <TextField
                         type='number'
                         InputProps={{ inputProps: { min: 1, max: 52 } }}
@@ -70,22 +73,22 @@ export default function BettingPage() {
                         error={chosenNumber > 54 || chosenNumber < 0}
                         helperText={chosenNumber > 54 || chosenNumber < 0 ? 'Error Value' : chosenNumber}
                         required
-                    //  disabled={ numberArray.length === type ? false:true}
+                    //  disabled={ NumberArray.length === type ? false:true}
                     >
                     </TextField>
                     <IconButton disabled={disabled} onClick={() => {
-                        if (numberArray) {
-                            if (numberArray.length < type) {
+                        if (NumberArray) {
+                            if (NumberArray.length < type) {
                                 if (chosenNumber < 52 && chosenNumber > 0) {
-                                    if (numberArray.length >= 1) {
-                                        if (numberArray.includes(chosenNumber)) {
+                                    if (NumberArray.length >= 1) {
+                                        if (NumberArray.includes(chosenNumber)) {
                                             console.log('Error')
                                         }
                                         else {
-                                            numberArray.push(chosenNumber)
+                                            NumberArray.push(chosenNumber)
                                             //inputRef.current = null
                                             setNumberObject({ id: chosenNumber })
-                                            array.push(numberObject)
+                                            array.push(NumberObject)
                                             console.log(array)
                                         }
                                     }
@@ -98,16 +101,16 @@ export default function BettingPage() {
                                     console.log('Error')
                                 }
                             }
-                            if (numberArray.length === type) {
+                            if (NumberArray.length === type) {
                                 setSuccess(true)
                                 setDisabled(true)
-                                console.log(numberArray)
+                                console.log(NumberArray)
                             }
                         }
                     }
 
                     }><AddIcon /></IconButton>
-                    <Typography>Numbers chosen: {[numberArray] + ''} </Typography>
+                    <Typography>Numbers chosen: {[NumberArray] + ''} </Typography>
                     <Button onClick={() => {
                         if (success === true) {
                             setText('Successfully Placed your bets')
@@ -123,9 +126,12 @@ export default function BettingPage() {
             </Grid>
             <Grid>
                 {
-                    numberArray.map((i, key) => {
-                        return <Button key={key} onClick={
-                            handleClick}>{i}</Button>
+                    NumberArray.map((i, key) => {
+                        return <Button key={key} onClick={(e)=>{
+                            handleClick( e ,i)
+                            setIndex(i)
+                        }
+                        }>{i}</Button>
                     })
 
 
@@ -140,9 +146,16 @@ export default function BettingPage() {
                     TransitionComponent={Fade}
                 >
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
-                    <MenuItem onClick={() => {
-                        numberArray.pop()
+                    <MenuItem onClick={(e:any) => {
+                        console.log(index)
+                        const ind = NumberArray.indexOf(index);
+                        if (ind > -1) {
+                            NumberArray.splice(ind, 1);
+                          }
+                        
                         setDisabled(false);
+                        setSuccess(false);
+                        handleClose();
                     }
                     }>Delete</MenuItem>
                 </Menu>
